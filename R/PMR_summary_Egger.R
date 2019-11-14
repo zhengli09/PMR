@@ -21,6 +21,8 @@
 PMR_summary_Egger<-function(Zscore_1, Zscore_2, Sigma1sin, Sigma2sin, samplen1, samplen2, max_iterin =1000,epsin=1e-5, Heritability_geneexpression_threshold=1e-04){
 betaxin<-Zscore_1/sqrt(samplen1-1)
 betayin<-Zscore_2/sqrt(samplen2-1)
+Sigma2sin_tmp<-pdsoft(Sigma2sin,lam=0.015)
+Sigma2sin<-Sigma2sin_tmp$theta
 fmH1=PMR_summary_Egger_CPP(betaxin,betayin,Sigma1sin,Sigma2sin,samplen1,samplen2,gammain=0,alphain=0,max_iterin =max_iterin, epsin=epsin)
 p=length(betaxin)
 Heritability_estimate=p*fmH1$sigmabeta
